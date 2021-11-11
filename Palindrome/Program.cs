@@ -1,5 +1,6 @@
-﻿using System;
+using System;
 using System.Collections;
+using System.Linq;
 
 namespace Palindrome
 {
@@ -10,7 +11,7 @@ namespace Palindrome
             printResult("ADA");
             printResult("ABCD");
             printResult("RENNER");
-            printResult("socorram me subi no on ibus em marrocos");
+            printResult("socorram me subi no onibus em marrocos");
             printResult("ARARA");
             printResult("atabaca");
         }
@@ -21,22 +22,18 @@ namespace Palindrome
         }
         public static bool palindromeTest(string word)
         {
-            Stack stack = new Stack();
-
+            string palavraSemEspaco = "";
             for (int i = 0; i < word.Length; i++)
             {
-                stack.Push(word[i]);
+                if (word[i].Equals(' '))
+                {
+                    i++;
+                }
+                palavraSemEspaco += word[i].ToString();
             }
-            var inverseWord = "";
-            while (stack.Count >=1 )
-            {
-                inverseWord += stack.Pop();
-            }
-            if (inverseWord.Equals(word))
-            {
-                return true;
-            }
-            return false;
+            string inverseWord = new string(palavraSemEspaco.Reverse().ToArray());
+
+            return inverseWord.Equals(palavraSemEspaco);
         }
     }
 }
